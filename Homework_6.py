@@ -1,16 +1,17 @@
 from datetime import datetime
-from some_module import Field
 import re
 
 
-class PhoneField(Field):
+class Field:
     def __init__(self, value=None):
-        super().__init__(value)
+        self._value = value
 
-    @Field.value.setter
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
     def value(self, new_value):
-        if not re.match(r"^\(\d{3}\) \d{3}-\d{4}$", new_value):
-            raise ValueError("Phone number must be in the format (XXX) XXX-XXXX")
         self._value = new_value
 
 
